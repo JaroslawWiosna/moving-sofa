@@ -5,17 +5,12 @@ DEBUG_CXXFLAGS=$(CXXFLAGS) -ggdb -O0
 LIBS=-lpng16 -lgif
 PROG=moving-sofa
 DEBUG_PROG=$(PROG)_debug
-OBJS= \
-	  src/main.o \
 
 .PHONY: all
 all: $(PROG) Makefile
 
-# TODO: Does %.cpp capture src/%.cpp?
-%.cpp: %.hpp
-
-$(PROG): $(OBJS) Makefile
-	$(CXX) $(CXXFLAGS) -o $(PROG) $(OBJS) $(LIBS)
+$(PROG): Makefile src/main.cpp
+	$(CXX) $(CXXFLAGS) -o $(PROG) src/main.cpp $(LIBS)
 
 # %.o: %.cpp
 # 	$(CXX) $(CXXFLAGS) -o $@ $<
