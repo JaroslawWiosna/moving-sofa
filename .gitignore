@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+*.png
+moving-sofa
+moving-sofa_debug
