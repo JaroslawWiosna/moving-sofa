@@ -56,9 +56,9 @@ template <typename T> struct Vec2 {
 using Vec2i = Vec2<int>;
 
 struct Sofa {
-    size_t length{350};
-    size_t width{100};
-    Vec2i pos{-400, -100};
+    size_t length{350'000};
+    size_t width{100'000};
+    Vec2i pos{-400'000, -100'000};
 };
 
 struct Line {
@@ -68,19 +68,19 @@ struct Line {
 
 struct Borders {
     std::array<Line, 2> horizontal_lines = {
-        Line{{-300, 0}, {0, 0}},
-        Line{{-300, -100}, {100, -100}},
+        Line{{-300'000, 0}, {0, 0}},
+        Line{{-300'000, -100'000}, {100'000, -100'000}},
     };
     std::array<Line, 2> vertical_lines = {
-        Line{{0, 0}, {0, 300}},
-        Line{{100, -100}, {100, 300}},
+        Line{{0, 0}, {0, 300'000}},
+        Line{{100'000, -100'000}, {100'000, 300'000}},
     };
 };
 
 struct Camera {
-    Vec2i pos{-500,-150};
-    Vec2i size{1000, 1000};
-    int zoom {4};
+    Vec2i pos{-500'000,-150'000};
+    Vec2i size{1'000, 1'000};
+    int zoom {1'000};
 };
 
 struct Plane {
@@ -135,7 +135,7 @@ void Plane::render(const char * filename) {
 
     // BORDERS
 
-    const int line_width = 5;
+    const int line_width = 5'000;
     for (const auto& line : borders.horizontal_lines) {
         size_t line_x1 = (line.a.x - camera.pos.x) / camera.zoom;
         size_t line_x2 = (line.b.x + line_width - camera.pos.x) / camera.zoom;
@@ -192,7 +192,7 @@ int main(int argc, char* argv[]) {
     std::cout << "\tMove right"
               << "\n";
 
-    plane.move({200, 0});
+    plane.move({200'000, 0});
     plane.render("output01.png");
 
     exit(0);
@@ -210,7 +210,7 @@ int main(int argc, char* argv[]) {
     std::cout << "\tMove down"
               << "\n";
 
-    plane.move({0, 80});
+    plane.move({0, 8000});
     plane.render("output03.png");
 
     return 0;
