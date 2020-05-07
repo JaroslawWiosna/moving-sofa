@@ -78,8 +78,9 @@ struct Borders {
 };
 
 struct Camera {
-    Vec2i pos{-500,-500};
+    Vec2i pos{-500,-150};
     Vec2i size{1000, 1000};
+    int zoom {4};
 };
 
 struct Plane {
@@ -113,10 +114,10 @@ void Plane::render(const char * filename) {
 
     // SOFA AS A WHOLE
 
-    int sofa_x1 = sofa.pos.x - camera.pos.x;
-    int sofa_x2 = sofa.pos.x - camera.pos.x + (int)sofa.length;
-    int sofa_y1 = sofa.pos.y - camera.pos.y;
-    int sofa_y2 = sofa.pos.y - camera.pos.y + (int)sofa.width;
+    size_t sofa_x1 = (sofa.pos.x - camera.pos.x) / camera.zoom;
+    size_t sofa_x2 = (sofa.pos.x - camera.pos.x + (int)sofa.length) / camera.zoom;
+    size_t sofa_y1 = (sofa.pos.y - camera.pos.y) / camera.zoom;
+    size_t sofa_y2 = (sofa.pos.y - camera.pos.y + (int)sofa.width) / camera.zoom;
 
     // std::cout << "sofa.pos.x == " << sofa.pos.x << "\n";
     // std::cout << "sofa.pos.y == " << sofa.pos.y << "\n";
@@ -126,8 +127,8 @@ void Plane::render(const char * filename) {
     // std::cout << "sofa_y1 == " << sofa_y1 << "\n";
     // std::cout << "sofa_y2 == " << sofa_y2 << "\n";
 
-    for (int y = sofa_y1; y < sofa_y2; ++y) {
-        for (int x = sofa_x1; x < sofa_x2; ++x) {
+    for (size_t y = sofa_y1; y < std::min(sofa_y2,image.height); ++y) {
+        for (size_t x = sofa_x1; x < std::min(sofa_x2,image.height); ++x) {
             image.pixels[y * image.width + x] = SOFA_OUTSIDE_COLOR;
         }
     }
@@ -136,32 +137,32 @@ void Plane::render(const char * filename) {
 
     const int line_width = 5;
     for (const auto& line : borders.horizontal_lines) {
-        int line_x1 = line.a.x - camera.pos.x;
-        int line_x2 = line.b.x + line_width - camera.pos.x;
-        int line_y1 = line.a.y - camera.pos.y;
-        int line_y2 = line.a.y + line_width - camera.pos.y;
-        for (int y = line_y1; y < line_y2; ++y) {
-            for (int x = line_x1; x < line_x2; ++x) {
+        size_t line_x1 = (line.a.x - camera.pos.x) / camera.zoom;
+        size_t line_x2 = (line.b.x + line_width - camera.pos.x) / camera.zoom;
+        size_t line_y1 = (line.a.y - camera.pos.y) / camera.zoom;
+        size_t line_y2 = (line.a.y + line_width - camera.pos.y) / camera.zoom;
+        for (size_t y = line_y1; y < std::min(line_y2,image.height); ++y) {
+            for (size_t x = line_x1; x < std::min(line_x2,image.width); ++x) {
                 image.pixels[y * image.width + x] = BORDER_COLOR;
             }
         }        
     }
 
     for (const auto& line : borders.vertical_lines) {
-        int line_x1 = line.a.x - camera.pos.x;
-        int line_x2 = line.b.x - camera.pos.x + line_width ;
-        int line_y1 = line.a.y - camera.pos.y;
-        int line_y2 = line.b.y - camera.pos.y + line_width ;
-        for (int y = line_y1; y < line_y2; ++y) {
-            for (int x = line_x1; x < line_x2; ++x) {
+        size_t line_x1 = (line.a.x - camera.pos.x) / camera.zoom;
+        size_t line_x2 = (line.b.x - camera.pos.x + line_width ) / camera.zoom;
+        size_t line_y1 = (line.a.y - camera.pos.y) / camera.zoom;
+        size_t line_y2 = (line.b.y - camera.pos.y + line_width ) / camera.zoom;
+        for (size_t y = line_y1; y < std::min(line_y2,image.height); ++y) {
+            for (size_t x = line_x1; x < std::min(line_x2,image.height); ++x) {
                 image.pixels[y * image.width + x] = BORDER_COLOR;
             }
         }        
     }
 
-    // TODO: pxl_inside_border is hardcoded
-    auto pxl_inside_border = [](int x, int y) -> bool {
-        if (x > 200 && x < 600 && y > 400 && y < 500) {
+    // TODO: pxl_inside_border is not fully implemented
+    auto pxl_inside_border = [this](int x, int y) -> bool {        
+        if (x < (borders.vertical_lines[1].a.x - camera.pos.x) / camera.zoom) {
             return true;
         }
         return false;
@@ -169,8 +170,8 @@ void Plane::render(const char * filename) {
 
     // SOFA INSIDE
 
-    for (int y = sofa_y1; y < sofa_y2; ++y) {
-        for (int x = sofa_x1; x < sofa_x2; ++x) {
+    for (size_t y = sofa_y1; y < std::min(sofa_y2,image.height); ++y) {
+        for (size_t x = sofa_x1; x < std::min(sofa_x2,image.height); ++x) {
             if (pxl_inside_border(x, y)) {
             image.pixels[y * image.width + x] = SOFA_INSIDE_COLOR;
         }}
