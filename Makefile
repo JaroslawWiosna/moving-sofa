@@ -9,7 +9,7 @@ DEBUG_PROG=$(PROG)_debug
 .PHONY: all
 all: $(PROG) Makefile
 
-$(PROG): Makefile src/main.cpp
+$(PROG): Makefile src/main.cpp $(wildcard src/main_*.cpp)
 	$(CXX) $(CXXFLAGS) -o $(PROG) src/main.cpp $(LIBS)
 
 # %.o: %.cpp
