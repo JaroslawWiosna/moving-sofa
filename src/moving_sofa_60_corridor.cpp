@@ -16,6 +16,9 @@ struct Corridor {
     int rotation{};
     bool is_inside(Vec2<size_t> v);
     bool is_outside(Vec2<size_t> v);
+    void rotate(int angle) {
+        assert(!"TODO: void Corridor::rotate(int angle)");
+    }
 };
 
 bool Corridor::is_inside(Vec2<size_t> v) {
