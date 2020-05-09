@@ -9,8 +9,8 @@ DEBUG_PROG=$(PROG)_debug
 .PHONY: all
 all: $(PROG) Makefile
 
-$(PROG): Makefile src/main.cpp $(wildcard src/main_*.cpp)
-	$(CXX) $(CXXFLAGS) -o $(PROG) src/main.cpp $(LIBS)
+$(PROG): Makefile $(wildcard src/moving_sofa*.cpp)
+	$(CXX) $(CXXFLAGS) -o $(PROG) src/moving_sofa.cpp $(LIBS)
 
 # %.o: %.cpp
 # 	$(CXX) $(CXXFLAGS) -o $@ $<
@@ -21,7 +21,7 @@ run: $(PROG)
 
 .PHONY: debug
 debug: Makefile
-	$(CXX) $(DEBUG_CXXFLAGS) -o $(DEBUG_PROG) src/main.cpp $(LIBS)
+	$(CXX) $(DEBUG_CXXFLAGS) -o $(DEBUG_PROG) src/moving_sofa.cpp $(LIBS)
 
 .PHONY: run-debug
 run-debug: debug
@@ -37,6 +37,6 @@ format: $(wildcard *.cpp) $(wildcard *.hpp)
 	
 .PHONY: clean
 clean:
-	rm -rf src/*.o
 	rm -rf $(PROG)
 	rm -rf $(DEBUG_PROG)
+	rm -rf *.png
