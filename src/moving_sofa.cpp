@@ -4,7 +4,6 @@
 #include <array>
 #include <cassert>
 #include <iostream>
-#include <vector>
 
 #include "moving_sofa_10_pixel.cpp"
 #include "moving_sofa_20_image.cpp"
