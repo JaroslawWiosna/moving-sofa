@@ -18,10 +18,11 @@ Animation of moving sofa problem
  * [x] (#3) Procedurally rotate corridor
    * [x] by its corner
    * [x] by any point, even outside of corridor
- * [ ] (#6) Calculate area of Sofa
+ * [X] (#6) Calculate area of Sofa
  * [ ] Procedurally move corridor (from rhs to lhs)
  * [ ] Think about additive geometry in Corridor
    * This is not really needed, but in the future, when we have different shaped corridors, it would be easier to compose shapes.
+ * [ ] CI on github
  * [ ] Display text on image
  * [ ] Camera with zoom
  * [ ] Summarize the project in this very README
