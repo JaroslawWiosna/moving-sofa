@@ -46,6 +46,9 @@ struct Box {
         pos = line.b;
         rotation += angle;
     }
+    void move(Vec2f v) {
+        pos += v;
+    }
     void rotate(float angle) {
         rotation += angle;
     }

@@ -1,5 +1,6 @@
 struct Plane {
     Sofa sofa{};
+    SofaArea sofaArea{};
     Corridor corridor{};
     void rotate();
     void draw_start_and_finish(Image& image);

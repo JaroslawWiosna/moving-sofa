@@ -11,11 +11,16 @@
 // 25pt of outside, 100pt of inside, 25pt of outside
 
 struct Corridor {
-    Box box{{700, 300}, {150, 150}};
+    Box box{{700, 275}, {150, 150}};
     Box inner1{{700, 325}, {125, 100}};
     Box inner2{{825, 325}, {100, 125}};
     bool is_inside(Vec2f v);
     bool is_outside(Vec2f v);
+    void move(Vec2f v) {
+        box.move(v);
+        inner1.move(v);
+        inner2.move(v);
+    }
     void rotate(float angle, Vec2f point) {
         box.rotate(angle, point);
         inner1.rotate(angle, point);
