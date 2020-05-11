@@ -22,7 +22,7 @@ struct Line {
     float angle() const {
         const float dy = b.y - a.y;
         const float dx = b.x - a.x;
-        // TODO: in c++20 put [[unlikely]] before if
+        // TODO(#5): in c++20 put [[unlikely]] before if
         if (dy == 0 && dx == 0) {
             return {};
         }
