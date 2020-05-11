@@ -20,7 +20,8 @@ const Pixel FINISH_COLOR = START_COLOR;
 const Pixel CORRIDOR_COLOR{140, 140, 90, 255};
 
 void Plane::draw_sofa(Image& image) {
-    for (size_t y = (size_t)sofa.posy(); y < (sofa.posy() + sofa.width()); ++y) {
+    for (size_t y = (size_t)sofa.posy(); y < (sofa.posy() + sofa.width());
+         ++y) {
         for (size_t x = (size_t)sofa.posx(); x < (sofa.posx() + sofa.length());
              ++x) {
             image.pixels[y * 1000 + x] = SOFA_INSIDE_COLOR;
@@ -29,28 +30,27 @@ void Plane::draw_sofa(Image& image) {
 }
 
 void Plane::draw_corridor(Image& image) {
-    for (size_t y = (size_t)corridor.box.pos.y; y < (corridor.box.pos.y + corridor.box.size.y); ++y) {
-        for (size_t x = (size_t)corridor.box.pos.x; x < (corridor.box.pos.x + corridor.box.size.x);
-             ++x) {
+    for (size_t y = (size_t)corridor.box.pos.y;
+         y < (corridor.box.pos.y + corridor.box.size.y); ++y) {
+        for (size_t x = (size_t)corridor.box.pos.x;
+             x < (corridor.box.pos.x + corridor.box.size.x); ++x) {
             image.pixels[y * 1000 + x] = CORRIDOR_COLOR;
         }
-    }}
+    }
+}
 
 void Plane::draw_start_and_finish(Image& image) {
     const size_t line_width{5};
     for (size_t y = (size_t)10; y < 800; ++y) {
-        for (size_t x = 250; x < 250 + line_width;
-             ++x) {
+        for (size_t x = 250; x < 250 + line_width; ++x) {
             image.pixels[y * 1000 + x] = FINISH_COLOR;
         }
     }
-   for (size_t y = (size_t)10; y < 800; ++y) {
-        for (size_t x = 650; x < 650 + line_width;
-             ++x) {
+    for (size_t y = (size_t)10; y < 800; ++y) {
+        for (size_t x = 650; x < 650 + line_width; ++x) {
             image.pixels[y * 1000 + x] = START_COLOR;
         }
     }
-
 }
 
 void Plane::render(const char* filename) {
