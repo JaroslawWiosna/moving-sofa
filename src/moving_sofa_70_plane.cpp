@@ -29,8 +29,8 @@ void Plane::draw_sofa(Image& image) {
 }
 
 void Plane::draw_corridor(Image& image) {
-    for (size_t y = (size_t)corridor.pos.y; y < (corridor.pos.y + corridor.size.y); ++y) {
-        for (size_t x = (size_t)corridor.pos.x; x < (corridor.pos.x + corridor.size.x);
+    for (size_t y = (size_t)corridor.box.pos.y; y < (corridor.box.pos.y + corridor.box.size.y); ++y) {
+        for (size_t x = (size_t)corridor.box.pos.x; x < (corridor.box.pos.x + corridor.box.size.x);
              ++x) {
             image.pixels[y * 1000 + x] = CORRIDOR_COLOR;
         }
