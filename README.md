@@ -21,6 +21,9 @@ Animation of moving sofa problem
  * [X] (#6) Calculate area of Sofa
  * [X] Procedurally move corridor (from rhs to lhs)
  * [ ] Develop macros for unit testing
+   * Naming of macros can be inspired by https://github.com/google/googletest/blob/master/googletest/docs/primer.md 
+   * The idea is to develop macros which I need
+   * GTest is great by I would like to postpone integrating GTEST into this very project, if possible, because I'd like to keep my project without dependencies.
  * [ ] Draw corridor, even when its rotated
  * [ ] Think about additive geometry in Corridor
    * This is not really needed, but in the future, when we have different shaped corridors, it would be easier to compose shapes.

@@ -5,19 +5,24 @@ DEBUG_CXXFLAGS=$(CXXFLAGS) -ggdb -O0
 LIBS=-lpng16 -lgif
 PROG=moving-sofa
 DEBUG_PROG=$(PROG)_debug
+TEST_PROG=$(PROG)_test
 
 .PHONY: all
-all: $(PROG) Makefile
+all: $(PROG) $(TEST_PROG) Makefile
 
 $(PROG): Makefile $(wildcard src/moving_sofa*.cpp)
 	$(CXX) $(CXXFLAGS) -o $(PROG) src/moving_sofa.cpp $(LIBS)
 
-# %.o: %.cpp
-# 	$(CXX) $(CXXFLAGS) -o $@ $<
+$(TEST_PROG): Makefile $(wildcard src/moving_sofa*.cpp)
+	$(CXX) $(CXXFLAGS) -o $(TEST_PROG) src/moving_sofa_test.cpp $(LIBS)
 
 .PHONY: run
 run: $(PROG)
 	./$(PROG)
+
+.PHONY: test
+test: $(TEST_PROG)
+	./$(TEST_PROG)
 
 .PHONY: debug
 debug: Makefile
