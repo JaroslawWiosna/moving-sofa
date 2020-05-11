@@ -20,8 +20,8 @@ const Pixel FINISH_COLOR = START_COLOR;
 const Pixel CORRIDOR_COLOR{140, 140, 90, 255};
 
 void Plane::draw_sofa(Image& image) {
-    for (size_t y = (size_t)sofa.pos.y; y < (sofa.pos.y + sofa.width); ++y) {
-        for (size_t x = (size_t)sofa.pos.x; x < (sofa.pos.x + sofa.length);
+    for (size_t y = (size_t)sofa.posy(); y < (sofa.posy() + sofa.width()); ++y) {
+        for (size_t x = (size_t)sofa.posx(); x < (sofa.posx() + sofa.length());
              ++x) {
             image.pixels[y * 1000 + x] = SOFA_INSIDE_COLOR;
         }
@@ -29,8 +29,8 @@ void Plane::draw_sofa(Image& image) {
 }
 
 void Plane::draw_corridor(Image& image) {
-    for (size_t y = (size_t)corridor.pos.y; y < (corridor.pos.y + corridor.size.y); ++y) {
-        for (size_t x = (size_t)corridor.pos.x; x < (corridor.pos.x + corridor.size.x);
+    for (size_t y = (size_t)corridor.box.pos.y; y < (corridor.box.pos.y + corridor.box.size.y); ++y) {
+        for (size_t x = (size_t)corridor.box.pos.x; x < (corridor.box.pos.x + corridor.box.size.x);
              ++x) {
             image.pixels[y * 1000 + x] = CORRIDOR_COLOR;
         }
