@@ -32,3 +32,16 @@ bool Corridor::is_inside(Vec2f v) {
 bool Corridor::is_outside(Vec2f v) {
     return box.contains(v) && !is_inside(v);
 }
+
+void SofaArea::set_elem_to_false_if_on_corridor_wall(Corridor &corridor) {
+    for (int y{}; y<100; ++y) {
+        for (int x{}; x<300; ++x) {
+            if (elems[y][x] == true) {
+                Vec2f point = elem_to_coord(y,x);
+                if (corridor.is_outside(point)) {
+                    elems[y][x] = false;
+                }
+            }
+        }
+    }
+}

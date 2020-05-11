@@ -59,6 +59,10 @@ void test() {
         box.rotate(45.0f, {500.0f, 500.0f});
         assert(box.contains({480.0f, 540.0f}));
     }
+    {
+        SofaArea sofaArea{};
+        assert(sofaArea.area() == 30000);
+    }
 }
 
 int main(int argc, char* argv[]) {
