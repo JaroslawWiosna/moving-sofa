@@ -11,7 +11,7 @@
 // 25pt of outside, 100pt of inside, 25pt of outside
 
 struct Corridor {
-    Box box{{700,300}, {150,150}};
+    Box box{{700, 300}, {150, 150}};
     Box inner1{{700, 325}, {125, 100}};
     Box inner2{{825, 325}, {100, 125}};
     bool is_inside(Vec2f v);
@@ -24,7 +24,6 @@ struct Corridor {
     void rotate(float angle) {
         rotate(angle, box.pos);
     }
-
 };
 
 bool Corridor::is_inside(Vec2f v) {

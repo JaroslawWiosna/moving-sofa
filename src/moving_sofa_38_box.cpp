@@ -15,8 +15,8 @@ struct Box {
         Line line{pos, point};
         line.rotate(-rotation);
         Vec2f rotated_point{line.b};
-        if (rotated_point.x > pos.x && rotated_point.x < pos.x + size.x && 
-        rotated_point.y > pos.y && rotated_point.y < pos.y + size.y) {
+        if (rotated_point.x > pos.x && rotated_point.x < pos.x + size.x &&
+            rotated_point.y > pos.y && rotated_point.y < pos.y + size.y) {
             return true;
         }
 
