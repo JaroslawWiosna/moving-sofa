@@ -2,10 +2,13 @@ struct Box {
     Vec2f pos{};
     Vec2f size{};
     float rotation{};
-    void rotate(int angle, Vec2f point) {
+    void rotate(float angle, Vec2f point) {
         Line line{point, pos};
         line.rotate(angle);
         pos = line.b;
+        rotation += angle;
+    }
+    void rotate(float angle) {
         rotation += angle;
     }
     bool contains(Vec2f point) {

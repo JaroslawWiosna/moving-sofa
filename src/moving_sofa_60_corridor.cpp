@@ -16,9 +16,15 @@ struct Corridor {
     Box inner2{{825, 325}, {100, 125}};
     bool is_inside(Vec2f v);
     bool is_outside(Vec2f v);
-    void rotate(int angle) {
-        assert(!"TODO(#3): void Corridor::rotate(int angle)");
+    void rotate(float angle, Vec2f point) {
+        box.rotate(angle, point);
+        inner1.rotate(angle, point);
+        inner2.rotate(angle, point);
     }
+    void rotate(float angle) {
+        rotate(angle, box.pos);
+    }
+
 };
 
 bool Corridor::is_inside(Vec2f v) {
