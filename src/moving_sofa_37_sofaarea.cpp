@@ -33,5 +33,10 @@ struct SofaArea {
         int x = i % 300;
         elem_to_coord(y, x);
     }
+    bool coord_to_elem(Vec2f a) {
+        int x = (int)a.x - pos.x;
+        int y = (int)a.y - pos.y;
+        return elems[y][x];
+    }
     void set_elem_to_false_if_on_corridor_wall(Corridor& corridor);
 };

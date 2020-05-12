@@ -14,7 +14,15 @@ int main(int argc, char* argv[]) {
         output_filename();
         plane.render(buf);
     };
-    plane.corridor.move({-200.0f, 0});
+    plane.corridor.move({-100.0f, 0});
+    for (float i{0}; i<100; i+=2) {
+        plane.corridor.move({-2.0f, 0});
+        plane.sofaArea.set_elem_to_false_if_on_corridor_wall(plane.corridor);
+        render_frame();
+    }
+    
+    exit(0);
+
     render_frame();
     for (float i{0}; i<100; i+=2) {
         plane.corridor.move({-2.0f, 0});
