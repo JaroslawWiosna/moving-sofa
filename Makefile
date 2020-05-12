@@ -27,7 +27,7 @@ render: $(PROG)
 	./$(PROG)
 #	convert -delay 5 -loop 0 *.png demo.gif
 	convert -fuzz 1% -delay 1x32 *.png -coalesce -layers OptimizeTransparency demo.gif
-	rm -rf *.png
+#	rm -rf *.png
 
 .PHONY: test
 test: $(TEST_PROG)

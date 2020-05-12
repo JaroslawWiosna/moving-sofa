@@ -28,5 +28,12 @@ int main(int argc, char* argv[]) {
         render_frame();
     }    
     std::cout << plane.sofaArea.area() / 10000.0f << "\n";
+    for (float i{0}; i<100; i+=2) {
+        plane.corridor.move({-2.0f, 0});
+        plane.sofaArea.set_elem_to_false_if_on_corridor_wall(plane.corridor);
+        render_frame();
+    }
+    std::cout << plane.sofaArea.area() / 10000.0f << "\n";
+    
     return 0;
 }

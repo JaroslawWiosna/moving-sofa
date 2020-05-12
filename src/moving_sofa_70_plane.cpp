@@ -26,16 +26,52 @@ void Plane::draw_sofa(Image& image) {
         for (size_t x = (size_t)sofa.posx(); x < (sofa.posx() + sofa.length());
              ++x) {
             image.pixels[y * 1000 + x] = SOFA_INSIDE_COLOR;
-            
+
         }
     }
 }
 
 void Plane::draw_corridor(Image& image) {
-    for (size_t y = (size_t)corridor.box.pos.y;
-         y < (corridor.box.pos.y + corridor.box.size.y); ++y) {
-        for (size_t x = (size_t)corridor.box.pos.x;
-             x < (corridor.box.pos.x + corridor.box.size.x); ++x) {
+    Vec2f pA = corridor.box.pos;
+    Vec2f pB = corridor.box.pos + Vec2f{corridor.box.size.x, 0};
+    Vec2f pD = corridor.box.pos + Vec2f{0, corridor.box.size.y};
+    Vec2f pC = Vec2f{pB.x, pD.y};
+
+    Line lineAB = {pA, pB};
+    Line lineAC = {pA, pC};
+    Line lineAD = {pA, pD};
+    
+    lineAB.rotate(corridor.box.rotation);
+    lineAC.rotate(corridor.box.rotation);
+    lineAD.rotate(corridor.box.rotation);
+
+    pB = lineAB.b;
+    pC = lineAC.b;
+    pD = lineAD.b;
+
+    size_t x1{(size_t)pA.x};
+    size_t x2{(size_t)pA.x};
+    size_t y1{(size_t)pA.y};
+    size_t y2{(size_t)pA.y};
+
+    if (pB.x < x1) { x1 = (size_t)pB.x; }
+    if (pC.x < x1) { x1 = (size_t)pC.x; }
+    if (pD.x < x1) { x1 = (size_t)pD.x; }
+
+    if (pB.x > x2) { x2 = (size_t)pB.x; }
+    if (pC.x > x2) { x2 = (size_t)pC.x; }
+    if (pD.x > x2) { x2 = (size_t)pD.x; }
+
+    if (pB.y < y1) { y1 = (size_t)pB.y; }
+    if (pC.y < y1) { y1 = (size_t)pC.y; }
+    if (pD.y < y1) { y1 = (size_t)pD.y; }
+
+    if (pB.y > y2) { y2 = (size_t)pB.y; }
+    if (pC.y > y2) { y2 = (size_t)pC.y; }
+    if (pD.y > y2) { y2 = (size_t)pD.y; }    
+
+    for (size_t y = y1; y < y2; ++y) {
+        for (size_t x = x1; x < x2; ++x) {
                  if (corridor.is_outside({float(x), float(y)})) {
                     image.pixels[y * 1000 + x] = CORRIDOR_COLOR;
                 }
