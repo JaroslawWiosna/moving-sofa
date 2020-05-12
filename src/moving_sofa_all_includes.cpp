@@ -10,7 +10,6 @@
 #include "moving_sofa_20_image.cpp"
 #include "moving_sofa_30_vec.cpp"
 #include "moving_sofa_35_line.cpp"
-#include "moving_sofa_37_sofaarea.cpp"
 #include "moving_sofa_38_box.cpp"
 #include "moving_sofa_40_sofa.cpp"
 #include "moving_sofa_60_corridor.cpp"

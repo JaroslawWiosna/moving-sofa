@@ -4,7 +4,8 @@ int main(int argc, char* argv[]) {
     std::cout << "This is " << argv[0] << "\n";
 
     Plane plane{};
-    std::cout << plane.sofaArea.area() / 10000.0f << "\n";
+    plane.sofa.box.create_elems(3000, 1000);
+    std::cout << plane.sofa.box.calculate_area() << "\n";
     char buf[256];
     auto output_filename = [&buf](){
         static float i{};
@@ -14,34 +15,45 @@ int main(int argc, char* argv[]) {
         output_filename();
         plane.render(buf);
     };
+    auto cut_sofa = [&](){
+        for (size_t i{}; i<plane.sofa.box.area.elems_size; ++i) {
+            if (true == plane.sofa.box.area.elems[i]) {
+                auto elem_as_point = plane.sofa.box.area.elem_to_coord(i);
+                if (plane.corridor.is_outside(elem_as_point)) {
+                    plane.sofa.box.area.elems[i] = false;
+                }
+            }
+        }
+    };
     plane.corridor.move({-100.0f, 0});
+    cut_sofa();
     for (float i{0}; i<100; i+=2) {
         plane.corridor.move({-2.0f, 0});
-        plane.sofaArea.set_elem_to_false_if_on_corridor_wall(plane.corridor);
+        cut_sofa();
         render_frame();
     }
     
-    exit(0);
+    // exit(0);
 
     render_frame();
     for (float i{0}; i<100; i+=2) {
         plane.corridor.move({-2.0f, 0});
-        plane.sofaArea.set_elem_to_false_if_on_corridor_wall(plane.corridor);
+        cut_sofa();
         render_frame();
     }
-    std::cout << plane.sofaArea.area() / 10000.0f << "\n";
+    std::cout << plane.sofa.box.calculate_area() << "\n";
     for (float i{0}; i<90; i+=2) {
         plane.corridor.rotate(-2.0f, {400, 400});
-        plane.sofaArea.set_elem_to_false_if_on_corridor_wall(plane.corridor);
+        cut_sofa();
         render_frame();
     }    
-    std::cout << plane.sofaArea.area() / 10000.0f << "\n";
+    std::cout << plane.sofa.box.calculate_area() << "\n";
     for (float i{0}; i<100; i+=2) {
         plane.corridor.move({-2.0f, 0});
-        plane.sofaArea.set_elem_to_false_if_on_corridor_wall(plane.corridor);
+        cut_sofa();
         render_frame();
     }
-    std::cout << plane.sofaArea.area() / 10000.0f << "\n";
+    std::cout << plane.sofa.box.calculate_area() << "\n";
     
     return 0;
 }

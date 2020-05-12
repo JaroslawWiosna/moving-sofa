@@ -1,6 +1,5 @@
 struct Plane {
     Sofa sofa{};
-    SofaArea sofaArea{};
     Corridor corridor{};
     void rotate();
     void draw_start_and_finish(Image& image);
@@ -25,10 +24,10 @@ void Plane::draw_sofa(Image& image) {
          ++y) {
         for (size_t x = (size_t)sofa.posx(); x < (sofa.posx() + sofa.length());
              ++x) {
-                 if (sofaArea.coord_to_elem({float(x), float(y)})) {
+                 size_t index = sofa.box.area.closest_elem_index({float(x), float(y)});
+                 if (sofa.box.area.elems[index]) {
                     image.pixels[y * 1000 + x] = SOFA_INSIDE_COLOR;
-                 } else
-                 {
+                 } else {
                     image.pixels[y * 1000 + x] = SOFA_OUTSIDE_COLOR;
                  }
         }
