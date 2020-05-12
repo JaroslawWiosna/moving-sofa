@@ -20,6 +20,15 @@ $(TEST_PROG): Makefile $(wildcard src/moving_sofa*.cpp)
 run: $(PROG)
 	./$(PROG)
 
+# https://gist.github.com/protrolium/21ab48468470ea8e3a72567fd8938abe
+.PHONY: render
+render: $(PROG)
+	rm -rf *.png
+	./$(PROG)
+#	convert -delay 5 -loop 0 *.png demo.gif
+	convert -fuzz 1% -delay 1x32 *.png -coalesce -layers OptimizeTransparency demo.gif
+	rm -rf *.png
+
 .PHONY: test
 test: $(TEST_PROG)
 	./$(TEST_PROG)

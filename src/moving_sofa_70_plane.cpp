@@ -26,6 +26,7 @@ void Plane::draw_sofa(Image& image) {
         for (size_t x = (size_t)sofa.posx(); x < (sofa.posx() + sofa.length());
              ++x) {
             image.pixels[y * 1000 + x] = SOFA_INSIDE_COLOR;
+            
         }
     }
 }
@@ -35,7 +36,9 @@ void Plane::draw_corridor(Image& image) {
          y < (corridor.box.pos.y + corridor.box.size.y); ++y) {
         for (size_t x = (size_t)corridor.box.pos.x;
              x < (corridor.box.pos.x + corridor.box.size.x); ++x) {
-            image.pixels[y * 1000 + x] = CORRIDOR_COLOR;
+                 if (corridor.is_outside({float(x), float(y)})) {
+                    image.pixels[y * 1000 + x] = CORRIDOR_COLOR;
+                }
         }
     }
 }
@@ -62,8 +65,8 @@ void Plane::render(const char* filename) {
     fill_img_with_color(image, BACKGROUND);
 
     draw_start_and_finish(image);
-    draw_corridor(image);
     draw_sofa(image);
+    draw_corridor(image);    
 
     save_image_as_png(image, filename);
     delete[](image.pixels);
