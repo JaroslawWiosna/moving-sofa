@@ -1,18 +1,18 @@
 struct Area {
-    Vec2f *pos = nullptr;
-    Vec2f *size = nullptr;
-    size_t elems_size {};
+    Vec2f* pos = nullptr;
+    Vec2f* size = nullptr;
+    size_t elems_size{};
     size_t x_elem_cnt{};
     size_t y_elem_cnt{};
-    bool *elems = nullptr;
+    bool* elems = nullptr;
     ~Area() {
         if (elems) {
             free(elems);
         }
     }
-    static bool *create_elems(size_t x_elem_cnt, size_t y_elem_cnt) {
-        bool *result = new bool[x_elem_cnt * y_elem_cnt];
-        // TODO: memset should be faster that for-loop 
+    static bool* create_elems(size_t x_elem_cnt, size_t y_elem_cnt) {
+        bool* result = new bool[x_elem_cnt * y_elem_cnt];
+        // TODO: memset should be faster that for-loop
         for (size_t i{0}; i < x_elem_cnt * y_elem_cnt; ++i) {
             result[i] = true;
         }
@@ -21,12 +21,12 @@ struct Area {
     // returns % (from 0.0f to 1.0f)
     float calculate_area() {
         size_t acc{};
-        for (size_t i{}; i<elems_size; ++i) {
+        for (size_t i{}; i < elems_size; ++i) {
             if (elems[i]) {
                 ++acc;
             }
         }
-        return float(acc) / float (elems_size);
+        return float(acc) / float(elems_size);
     }
     Vec2f elem_to_coord(size_t i) {
         const size_t x = i % x_elem_cnt;
@@ -39,7 +39,8 @@ struct Area {
         const float half_y_step = y_step / 2.0f;
 
         // TODO In Area::elem_to_coord(size_t) rotation is ignored
-        return {pos->x + half_x_step + x_step * x, pos->y + half_y_step + y_step * y};
+        return {pos->x + half_x_step + x_step * x,
+                pos->y + half_y_step + y_step * y};
     }
     Vec2f closest_point(Vec2f p) {
         const float x_step = size->x / x_elem_cnt;
@@ -51,7 +52,7 @@ struct Area {
         const float THIS_IS_REALLY_BIG_VALUE_TO_INIT_MIN_DIST{10000.f};
         float min_dist_to_result_x{THIS_IS_REALLY_BIG_VALUE_TO_INIT_MIN_DIST};
         float result_x{};
-        for (size_t x{}; x<x_elem_cnt; ++x) {
+        for (size_t x{}; x < x_elem_cnt; ++x) {
             float tmp_x = pos->x + half_x_step + x_step * x;
             if (abs(p.x - tmp_x) < min_dist_to_result_x) {
                 min_dist_to_result_x = abs(p.x - tmp_x);
@@ -60,7 +61,7 @@ struct Area {
         }
         float min_dist_to_result_y{THIS_IS_REALLY_BIG_VALUE_TO_INIT_MIN_DIST};
         float result_y{};
-        for (size_t y{}; y<y_elem_cnt; ++y) {
+        for (size_t y{}; y < y_elem_cnt; ++y) {
             float tmp_y = pos->y + half_y_step + y_step * y;
             if (abs(p.y - tmp_y) < min_dist_to_result_y) {
                 min_dist_to_result_y = abs(p.y - tmp_y);
@@ -80,7 +81,7 @@ struct Area {
         float min_dist_to_result_x{THIS_IS_REALLY_BIG_VALUE_TO_INIT_MIN_DIST};
         float result_x{};
         size_t x_elem_index{};
-        for (size_t x{}; x<x_elem_cnt; ++x) {
+        for (size_t x{}; x < x_elem_cnt; ++x) {
             float tmp_x = pos->x + half_x_step + x_step * x;
             if (abs(p.x - tmp_x) < min_dist_to_result_x) {
                 min_dist_to_result_x = abs(p.x - tmp_x);
@@ -91,7 +92,7 @@ struct Area {
         float min_dist_to_result_y{THIS_IS_REALLY_BIG_VALUE_TO_INIT_MIN_DIST};
         float result_y{};
         size_t y_elem_index{};
-        for (size_t y{}; y<y_elem_cnt; ++y) {
+        for (size_t y{}; y < y_elem_cnt; ++y) {
             float tmp_y = pos->y + half_y_step + y_step * y;
             if (abs(p.y - tmp_y) < min_dist_to_result_y) {
                 min_dist_to_result_y = abs(p.y - tmp_y);
@@ -107,7 +108,7 @@ struct Box {
     Vec2f pos{};
     Vec2f size{};
     float rotation{};
-    Area area {};
+    Area area{};
     void rotate(float angle, Vec2f point) {
         Line line{point, pos};
         line.rotate(angle);
@@ -133,13 +134,14 @@ struct Box {
     void create_elems(size_t x, size_t y) {
         if (area.elems == nullptr) {
             area.pos = &pos;
-            area.size =&size;
+            area.size = &size;
             area.elems = Area::create_elems(x, y);
             area.x_elem_cnt = x;
             area.y_elem_cnt = y;
-            area.elems_size = x*y;
+            area.elems_size = x * y;
         } else {
-            assert(!"You explicitly wanted to allocate elems, but it was allocated before.");
+            assert(!"You explicitly wanted to allocate elems, but it was "
+                    "allocated before.");
         }
     }
     float calculate_area() {

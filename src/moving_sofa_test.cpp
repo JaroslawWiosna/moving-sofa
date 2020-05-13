@@ -65,7 +65,7 @@ void test() {
         Box box{{200, 200}, {10, 10}};
         box.create_elems(7, 11);
         Vec2f point{};
-        for (size_t i{}; i<7*11; ++i) {
+        for (size_t i{}; i < 7 * 11; ++i) {
             point = box.elem_to_coord(i);
         }
     }
