@@ -62,11 +62,16 @@ void test() {
         assert(box.contains({480.0f, 540.0f}));
     }
     {
-        SofaArea sofaArea{};
-        assert(sofaArea.area() == 30000);
+        Box box{{200, 200}, {10, 10}};
+        box.create_elems(7, 11);
+        Vec2f point{};
+        for (size_t i{}; i<7*11; ++i) {
+            point = box.elem_to_coord(i);
+        }
     }
 }
 
 int main(int argc, char* argv[]) {
     test();
+    std::cout << "All tests passed\n";
 }

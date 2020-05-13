@@ -33,6 +33,11 @@ render: $(PROG)
 test: $(TEST_PROG)
 	./$(TEST_PROG)
 
+.PHONY: test-debug
+test-debug: test
+	$(CXX) $(DEBUG_CXXFLAGS) -o $(TEST_PROG) src/moving_sofa_test.cpp $(LIBS)
+	/opt/rh/devtoolset-7/root/usr/bin/gdb --command=.gdbinit ./$(TEST_PROG)
+
 .PHONY: debug
 debug: Makefile
 	$(CXX) $(DEBUG_CXXFLAGS) -o $(DEBUG_PROG) src/moving_sofa.cpp $(LIBS)
