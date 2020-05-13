@@ -26,7 +26,8 @@ Animation of moving sofa problem
    * [x] by any point, even outside of corridor
  * [X] (#6) Calculate area of Sofa
  * [X] Procedurally move corridor (from rhs to lhs)
- * [ ] Draw corridor, even when its rotated
+ * [x] Draw corridor, even when its rotated
+ * [ ] (#9) Display text on image
  * [ ] Develop macros for unit testing
    * Naming of macros can be inspired by https://github.com/google/googletest/blob/master/googletest/docs/primer.md 
    * The idea is to develop macros which I need
@@ -34,7 +35,6 @@ Animation of moving sofa problem
  * [ ] Think about additive geometry in Corridor
    * This is not really needed, but in the future, when we have different shaped corridors, it would be easier to compose shapes.
  * [ ] CI on github
- * [ ] Display text on image
  * [ ] Camera with zoom
  * [ ] Change the **unit** from `100.0f` to `1.0f`  
  * [ ] Summarize the project in this very README
