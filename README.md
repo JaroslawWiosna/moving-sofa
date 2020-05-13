@@ -28,7 +28,8 @@ Animation of moving sofa problem
  * [X] Procedurally move corridor (from rhs to lhs)
  * [x] Draw corridor, even when its rotated
  * [X] (#10) Decrease Image size
- * [ ] (#9) Display text on image
+ * [X] (#9) Display text on image
+ * [ ] (#13) Font path is hardcoded
  * [ ] Develop macros for unit testing
    * Naming of macros can be inspired by https://github.com/google/googletest/blob/master/googletest/docs/primer.md 
    * The idea is to develop macros which I need
