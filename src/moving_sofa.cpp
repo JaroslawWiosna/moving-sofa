@@ -4,7 +4,7 @@ int main(int argc, char* argv[]) {
     std::cout << "This is " << argv[0] << "\n";
 
     Plane plane{};
-    plane.sofa.box.create_elems(3000, 1000);
+    plane.sofa.box.create_elems(300, 100);
     std::cout << plane.sofa.box.calculate_area() << "\n";
     char buf[256];
     auto output_filename = [&buf](){
