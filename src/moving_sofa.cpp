@@ -6,14 +6,17 @@ int main(int argc, char* argv[]) {
     Plane plane{};
     plane.sofa.box.create_elems(300, 100);
     std::cout << plane.sofa.box.calculate_area() << "\n";
-    char buf[256];
-    auto output_filename = [&buf]() {
+    char output_filename[256];
+    char text_to_display_on_image[256];
+    sprintf(text_to_display_on_image, ":-)");
+    auto generate_output_filename = [&output_filename]() {
         static float i{};
-        sprintf(buf, "output%04.f.png", i++);
+        sprintf(output_filename, "output%04.f.png", i++);
     };
     auto render_frame = [&]() {
-        output_filename();
-        plane.render(buf);
+        generate_output_filename();
+        sprintf(text_to_display_on_image, "Area: %1.4f", plane.sofa.box.calculate_area() / 10000.f);
+        plane.render(output_filename, text_to_display_on_image);
     };
     auto cut_sofa = [&]() {
         for (size_t i{}; i < plane.sofa.box.area.elems_size; ++i) {

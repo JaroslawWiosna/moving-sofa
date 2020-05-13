@@ -5,7 +5,7 @@ struct Plane {
     void draw_start_and_finish(Image& image);
     void draw_sofa(Image& image);
     void draw_corridor(Image& image);
-    void render(const char*);
+    void render(const char* filename, const char* text);
 };
 
 void Plane::rotate() {
@@ -121,7 +121,7 @@ void Plane::draw_start_and_finish(Image& image) {
     }
 }
 
-void Plane::render(const char* filename) {
+void Plane::render(const char* filename, const char* text) {
     Image image{};
     image.width = 900;
     image.height = 600;
@@ -131,6 +131,7 @@ void Plane::render(const char* filename) {
     draw_start_and_finish(image);
     draw_sofa(image);
     draw_corridor(image);
+    freetype::put_text_area(image, text);
 
     save_image_as_png(image, filename);
     delete[](image.pixels);

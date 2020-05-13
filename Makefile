@@ -1,8 +1,8 @@
 # https://stackoverflow.com/a/13673907
-INCLUDES=-I/usr/sbin/include/libpng16 
+INCLUDES=-I/usr/sbin/include/libpng16 -I/usr/include/freetype2
 CXXFLAGS=$(INCLUDES) -O3 -std=c++17 -Wswitch -Wextra -Wpedantic -Werror
 DEBUG_CXXFLAGS=$(CXXFLAGS) -ggdb -O0
-LIBS=-lpng16 -lgif
+LIBS=-lpng16 -lgif -lfreetype
 PROG=moving-sofa
 DEBUG_PROG=$(PROG)_debug
 TEST_PROG=$(PROG)_test
