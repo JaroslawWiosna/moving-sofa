@@ -27,6 +27,7 @@ Animation of moving sofa problem
  * [X] (#6) Calculate area of Sofa
  * [X] Procedurally move corridor (from rhs to lhs)
  * [x] Draw corridor, even when its rotated
+ * [ ] (#10) Decrease Image size
  * [ ] (#9) Display text on image
  * [ ] Develop macros for unit testing
    * Naming of macros can be inspired by https://github.com/google/googletest/blob/master/googletest/docs/primer.md 
