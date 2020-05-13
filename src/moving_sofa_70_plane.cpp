@@ -84,12 +84,12 @@ void Plane::draw_corridor(Image& image) {
 
 void Plane::draw_start_and_finish(Image& image) {
     const size_t line_width{5};
-    for (size_t y = (size_t)10; y < 800; ++y) {
+    for (size_t y = (size_t)10; y < 600 - 10; ++y) {
         for (size_t x = 250; x < 250 + line_width; ++x) {
             image.pixels[y * 1000 + x] = FINISH_COLOR;
         }
     }
-    for (size_t y = (size_t)10; y < 800; ++y) {
+    for (size_t y = (size_t)10; y < 600 - 10; ++y) {
         for (size_t x = 650; x < 650 + line_width; ++x) {
             image.pixels[y * 1000 + x] = START_COLOR;
         }
@@ -99,7 +99,7 @@ void Plane::draw_start_and_finish(Image& image) {
 void Plane::render(const char* filename) {
     Image image{};
     image.width = 1000;
-    image.height = 1000;
+    image.height = 600;
     image.pixels = new Pixel[image.width * image.height];
     fill_img_with_color(image, BACKGROUND);
 
