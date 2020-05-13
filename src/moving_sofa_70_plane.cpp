@@ -26,9 +26,9 @@ void Plane::draw_sofa(Image& image) {
              ++x) {
                  size_t index = sofa.box.area.closest_elem_index({float(x), float(y)});
                  if (sofa.box.area.elems[index]) {
-                    image.pixels[y * 1000 + x] = SOFA_INSIDE_COLOR;
+                    image.pixels[y * 900 + x] = SOFA_INSIDE_COLOR;
                  } else {
-                    image.pixels[y * 1000 + x] = SOFA_OUTSIDE_COLOR;
+                    image.pixels[y * 900 + x] = SOFA_OUTSIDE_COLOR;
                  }
         }
     }
@@ -76,7 +76,7 @@ void Plane::draw_corridor(Image& image) {
     for (size_t y = y1; y < y2; ++y) {
         for (size_t x = x1; x < x2; ++x) {
                  if (corridor.is_outside({float(x), float(y)})) {
-                    image.pixels[y * 1000 + x] = CORRIDOR_COLOR;
+                    image.pixels[y * 900 + x] = CORRIDOR_COLOR;
                 }
         }
     }
@@ -86,19 +86,19 @@ void Plane::draw_start_and_finish(Image& image) {
     const size_t line_width{5};
     for (size_t y = (size_t)10; y < 600 - 10; ++y) {
         for (size_t x = 250; x < 250 + line_width; ++x) {
-            image.pixels[y * 1000 + x] = FINISH_COLOR;
+            image.pixels[y * 900 + x] = FINISH_COLOR;
         }
     }
     for (size_t y = (size_t)10; y < 600 - 10; ++y) {
         for (size_t x = 650; x < 650 + line_width; ++x) {
-            image.pixels[y * 1000 + x] = START_COLOR;
+            image.pixels[y * 900 + x] = START_COLOR;
         }
     }
 }
 
 void Plane::render(const char* filename) {
     Image image{};
-    image.width = 1000;
+    image.width = 900;
     image.height = 600;
     image.pixels = new Pixel[image.width * image.height];
     fill_img_with_color(image, BACKGROUND);
