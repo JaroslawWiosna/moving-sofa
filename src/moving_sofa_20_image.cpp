@@ -83,7 +83,7 @@ void put_text_area(Image& image, const char* text) {
             Pixel red{233, 27, 27, 0};
 
     {
-    // TODO: Font path is hardcoded
+    // TODO(#13): Font path is hardcoded
     const char *face_filepath = "/usr/share/fonts/stix/STIX-Regular.otf";
     FT_New_Face(library, face_filepath, 0, &face);
     FT_Set_Pixel_Sizes(face, 0, 12);
