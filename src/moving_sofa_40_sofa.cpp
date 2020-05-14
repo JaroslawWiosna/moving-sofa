@@ -8,7 +8,7 @@ struct Sofa {
     // ~Sofa() {
     //     delete[] elem;
     // }
-    Box box{{300, 300}, {300, 100}};
+    Box box{{200, 300}, {500, 100}};
     // const size_t length{300};
     // const size_t width{100};
     bool* elem;

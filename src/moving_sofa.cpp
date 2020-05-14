@@ -4,7 +4,7 @@ int main(int argc, char* argv[]) {
     std::cout << "This is " << argv[0] << "\n";
 
     Plane plane{};
-    plane.sofa.box.create_elems(300, 100);
+    plane.sofa.box.create_elems(500, 100);
     std::cout << plane.sofa.box.calculate_area() << "\n";
     char output_filename[256];
     char text_to_display_on_image[256];
@@ -28,9 +28,9 @@ int main(int argc, char* argv[]) {
             }
         }
     };
-    plane.corridor.move({-100.0f, 0});
+    plane.corridor.move({-10.0f, 0});
     cut_sofa();
-    for (float i{0}; i < 100; i += 2) {
+    for (float i{0}; i < 50; i += 2) {
         plane.corridor.move({-2.0f, 0});
         cut_sofa();
         render_frame();
@@ -45,8 +45,14 @@ int main(int argc, char* argv[]) {
         render_frame();
     }
     std::cout << plane.sofa.box.calculate_area() << "\n";
+    // 0deg -> 50,200   == (100 - 50 * cos(ang), 200 + 50 * sin(ang) )
+    // 90deg -> 100,250 == (100 - 50 * cos(ang), 200 + 50 * sin(ang) )
+    const float radius{95.0f};
     for (float i{0}; i < 90; i += 2) {
-        plane.corridor.rotate(-2.0f, {400, 400});
+        Vec2f rotation_point{100.0f - radius * float(cos(deg2rad(i))), 200.0f + radius * float(sin(deg2rad(i)))};
+        Line line{plane.corridor.box.pos, plane.corridor.box.pos + rotation_point};
+        line.rotate(plane.corridor.box.rotation);
+        plane.corridor.rotate(-2.0f, line.b);
         cut_sofa();
         render_frame();
     }
