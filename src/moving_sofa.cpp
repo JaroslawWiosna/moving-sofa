@@ -15,7 +15,8 @@ int main(int argc, char* argv[]) {
     };
     auto render_frame = [&]() {
         generate_output_filename();
-        sprintf(text_to_display_on_image, "Area: %1.4f", plane.sofa.box.calculate_area() / 10000.f);
+        sprintf(text_to_display_on_image, "Area: %1.4f",
+                plane.sofa.box.calculate_area() / 10000.f);
         plane.render(output_filename, text_to_display_on_image);
     };
     auto cut_sofa = [&]() {
@@ -49,8 +50,10 @@ int main(int argc, char* argv[]) {
     // 90deg -> 100,250 == (100 - 50 * cos(ang), 200 + 50 * sin(ang) )
     const float radius{95.0f};
     for (float i{0}; i < 90; i += 2) {
-        Vec2f rotation_point{100.0f - radius * float(cos(deg2rad(i))), 200.0f + radius * float(sin(deg2rad(i)))};
-        Line line{plane.corridor.box.pos, plane.corridor.box.pos + rotation_point};
+        Vec2f rotation_point{100.0f - radius * float(cos(deg2rad(i))),
+                             200.0f + radius * float(sin(deg2rad(i)))};
+        Line line{plane.corridor.box.pos,
+                  plane.corridor.box.pos + rotation_point};
         line.rotate(plane.corridor.box.rotation);
         plane.corridor.rotate(-2.0f, line.b);
         cut_sofa();

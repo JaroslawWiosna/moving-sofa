@@ -36,7 +36,7 @@ void put_ftbitmap_onto_image(Image dest, FT_Bitmap* src, Pixel color, int x,
 
     for (size_t row = 0; (row < (size_t)src->rows); ++row) {
         if (row + y < dest.height) {
-            for (size_t col = 0; (col < (size_t) src->width); ++col) {
+            for (size_t col = 0; (col < (size_t)src->width); ++col) {
                 if (col + x < dest.width) {
                     float a = src->buffer[row * src->pitch + col] / 255.0f;
                     dest.pixels[(row + y) * dest.width + col + x].r =
@@ -51,10 +51,10 @@ void put_ftbitmap_onto_image(Image dest, FT_Bitmap* src, Pixel color, int x,
                         a * color.b +
                         (1.0f - a) *
                             dest.pixels[(row + y) * dest.width + col + x].b;
-                }   
-            }   
-        }   
-    }   
+                }
+            }
+        }
+    }
 }
 
 void put_text_onto_image(Image image, FT_Face face, const char* text,
@@ -73,46 +73,43 @@ void put_text_onto_image(Image image, FT_Face face, const char* text,
                                 *pen_y - face->glyph->bitmap_top);
 
         *pen_x += face->glyph->advance.x >> 6;
-    }   
+    }
 }
 
 void put_text_area(Image& image, const char* text) {
     FT_Library library;
     auto error = FT_Init_FreeType(&library);
     FT_Face face;
-            Pixel red{233, 27, 27, 0};
-
-    {
-    // TODO(#13): Font path is hardcoded
-    const char *face_filepath = "/usr/share/fonts/stix/STIX-Regular.otf";
-    FT_New_Face(library, face_filepath, 0, &face);
-    FT_Set_Pixel_Sizes(face, 0, 12);
-
     Pixel red{233, 27, 27, 0};
 
-    int x = 10;
-    int y = 22;
-    put_text_onto_image(image, face, "Moving sofa problem", red, &x,
-                        &y);
+    {
+        // TODO(#13): Font path is hardcoded
+        const char* face_filepath = "/usr/share/fonts/stix/STIX-Regular.otf";
+        FT_New_Face(library, face_filepath, 0, &face);
+        FT_Set_Pixel_Sizes(face, 0, 12);
 
+        Pixel red{233, 27, 27, 0};
+
+        int x = 10;
+        int y = 22;
+        put_text_onto_image(image, face, "Moving sofa problem", red, &x, &y);
     }
-    
-    const char *face_filepath = "/usr/share/fonts/liberation/LiberationMono-Regular.ttf";
+
+    const char* face_filepath =
+        "/usr/share/fonts/liberation/LiberationMono-Regular.ttf";
     FT_New_Face(library, face_filepath, 0, &face);
     FT_Set_Pixel_Sizes(face, 0, 10);
 
     int x = 660;
     int y = 22;
-    put_text_onto_image(image, face, "github.com/JaroslawWiosna/moving-sofa", red, &x,
-                        &y);
+    put_text_onto_image(image, face, "github.com/JaroslawWiosna/moving-sofa",
+                        red, &x, &y);
 
-FT_New_Face(library, face_filepath, 0, &face);
+    FT_New_Face(library, face_filepath, 0, &face);
     FT_Set_Pixel_Sizes(face, 0, 33);
 
     x = 333;
     y = 100;
-    put_text_onto_image(image, face, text, red, &x,
-                        &y);
-
+    put_text_onto_image(image, face, text, red, &x, &y);
 }
 } // namespace freetype
