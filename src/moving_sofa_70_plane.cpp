@@ -1,10 +1,10 @@
 struct Plane {
     Sofa sofa{};
-    Corridor corridor{};
+    Walls walls{};
     void rotate();
     void draw_start_and_finish(Image& image);
     void draw_sofa(Image& image);
-    void draw_corridor(Image& image);
+    void draw_walls(Image& image);
     void render(const char* filename, const char* text);
 };
 
@@ -17,7 +17,7 @@ const Pixel SOFA_OUTSIDE_COLOR{255, 170, 170, 255};
 const Pixel SOFA_INSIDE_COLOR{255, 120, 120, 255};
 const Pixel START_COLOR{120, 170, 255, 255};
 const Pixel FINISH_COLOR = START_COLOR;
-const Pixel CORRIDOR_COLOR{140, 140, 90, 255};
+const Pixel WALLS_COLOR{140, 140, 90, 255};
 
 void Plane::draw_sofa(Image& image) {
     for (size_t y = (size_t)sofa.posy(); y < (sofa.posy() + sofa.width());
@@ -35,19 +35,19 @@ void Plane::draw_sofa(Image& image) {
     }
 }
 
-void Plane::draw_corridor(Image& image) {
-    Vec2f pA = corridor.box.pos;
-    Vec2f pB = corridor.box.pos + Vec2f{corridor.box.size.x, 0};
-    Vec2f pD = corridor.box.pos + Vec2f{0, corridor.box.size.y};
+void Plane::draw_walls(Image& image) {
+    Vec2f pA = walls.box.pos;
+    Vec2f pB = walls.box.pos + Vec2f{walls.box.size.x, 0};
+    Vec2f pD = walls.box.pos + Vec2f{0, walls.box.size.y};
     Vec2f pC = Vec2f{pB.x, pD.y};
 
     Line lineAB = {pA, pB};
     Line lineAC = {pA, pC};
     Line lineAD = {pA, pD};
 
-    lineAB.rotate(corridor.box.rotation);
-    lineAC.rotate(corridor.box.rotation);
-    lineAD.rotate(corridor.box.rotation);
+    lineAB.rotate(walls.box.rotation);
+    lineAC.rotate(walls.box.rotation);
+    lineAD.rotate(walls.box.rotation);
 
     pB = lineAB.b;
     pC = lineAC.b;
@@ -100,8 +100,8 @@ void Plane::draw_corridor(Image& image) {
 
     for (size_t y = y1; y < y2; ++y) {
         for (size_t x = x1; x < x2; ++x) {
-            if (corridor.is_outside({float(x), float(y)})) {
-                image.pixels[y * 900 + x] = CORRIDOR_COLOR;
+            if (walls.is_outside({float(x), float(y)})) {
+                image.pixels[y * 900 + x] = WALLS_COLOR;
             }
         }
     }
@@ -130,7 +130,7 @@ void Plane::render(const char* filename, const char* text) {
 
     draw_start_and_finish(image);
     draw_sofa(image);
-    draw_corridor(image);
+    draw_walls(image);
     freetype::put_text_area(image, text);
 
     save_image_as_png(image, filename);

@@ -12,5 +12,5 @@
 #include "moving_sofa_35_line.cpp"
 #include "moving_sofa_38_box.cpp"
 #include "moving_sofa_40_sofa.cpp"
-#include "moving_sofa_60_corridor.cpp"
+#include "moving_sofa_60_walls.cpp"
 #include "moving_sofa_70_plane.cpp"

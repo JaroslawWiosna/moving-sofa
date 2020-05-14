@@ -1,15 +1,4 @@
-//
-// outside out
-// ------+
-// inside|  out
-// ---+  |
-//  o |  | out
-//    |  |
-//
-
-// 25pt of outside, 100pt of inside, 25pt of outside
-
-struct Corridor {
+struct Walls {
     Box box{{600, 200}, {300, 300}};
     Box inner1{{600, 300}, {200, 100}};
     Box inner2{{700, 300}, {100, 200}};
@@ -30,9 +19,9 @@ struct Corridor {
     }
 };
 
-bool Corridor::is_inside(Vec2f v) {
+bool Walls::is_inside(Vec2f v) {
     return inner1.contains(v) || inner2.contains(v);
 }
-bool Corridor::is_outside(Vec2f v) {
+bool Walls::is_outside(Vec2f v) {
     return box.contains(v) && !is_inside(v);
 }

@@ -23,16 +23,16 @@ int main(int argc, char* argv[]) {
         for (size_t i{}; i < plane.sofa.box.area.elems_size; ++i) {
             if (true == plane.sofa.box.area.elems[i]) {
                 auto elem_as_point = plane.sofa.box.area.elem_to_coord(i);
-                if (plane.corridor.is_outside(elem_as_point)) {
+                if (plane.walls.is_outside(elem_as_point)) {
                     plane.sofa.box.area.elems[i] = false;
                 }
             }
         }
     };
-    plane.corridor.move({-10.0f, 0});
+    plane.walls.move({-10.0f, 0});
     cut_sofa();
     for (float i{0}; i < 50; i += 2) {
-        plane.corridor.move({-2.0f, 0});
+        plane.walls.move({-2.0f, 0});
         cut_sofa();
         render_frame();
     }
@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
 
     render_frame();
     for (float i{0}; i < 100; i += 2) {
-        plane.corridor.move({-2.0f, 0});
+        plane.walls.move({-2.0f, 0});
         cut_sofa();
         render_frame();
     }
@@ -52,16 +52,16 @@ int main(int argc, char* argv[]) {
     for (float i{0}; i < 90; i += 2) {
         Vec2f rotation_point{100.0f - radius * float(cos(deg2rad(i))),
                              200.0f + radius * float(sin(deg2rad(i)))};
-        Line line{plane.corridor.box.pos,
-                  plane.corridor.box.pos + rotation_point};
-        line.rotate(plane.corridor.box.rotation);
-        plane.corridor.rotate(-2.0f, line.b);
+        Line line{plane.walls.box.pos,
+                  plane.walls.box.pos + rotation_point};
+        line.rotate(plane.walls.box.rotation);
+        plane.walls.rotate(-2.0f, line.b);
         cut_sofa();
         render_frame();
     }
     std::cout << plane.sofa.box.calculate_area() << "\n";
     for (float i{0}; i < 100; i += 2) {
-        plane.corridor.move({-2.0f, 0});
+        plane.walls.move({-2.0f, 0});
         cut_sofa();
         render_frame();
     }
