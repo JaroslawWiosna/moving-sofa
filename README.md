@@ -31,13 +31,13 @@ Animation of moving sofa problem
  * [x] Draw corridor, even when its rotated
  * [X] (#10) Decrease Image size
  * [X] (#9) Display text on image
+ * [ ] (#14) Think about additive geometry in Corridor
+   * This is not really needed, but in the future, when we have different shaped corridors, it would be easier to compose shapes.
  * [ ] (#13) Font path is hardcoded
  * [ ] Develop macros for unit testing
    * Naming of macros can be inspired by https://github.com/google/googletest/blob/master/googletest/docs/primer.md 
    * The idea is to develop macros which I need
    * GTest is great by I would like to postpone integrating GTEST into this very project, if possible, because I'd like to keep my project without dependencies.
- * [ ] Think about additive geometry in Corridor
-   * This is not really needed, but in the future, when we have different shaped corridors, it would be easier to compose shapes.
  * [ ] CI on github
  * [ ] Camera with zoom
  * [ ] Change the **unit** from `100.0f` to `1.0f`  
