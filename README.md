@@ -31,8 +31,9 @@ Animation of moving sofa problem
  * [x] Draw corridor, even when its rotated
  * [X] (#10) Decrease Image size
  * [X] (#9) Display text on image
- * [ ] (#14) Think about additive geometry in Corridor
+ * [X] (#14) Think about additive geometry in Corridor
    * This is not really needed, but in the future, when we have different shaped corridors, it would be easier to compose shapes.
+   * Closed by (#16), but it is not really closed... Overall, Abstracting away inner boxes is not justified right now. See (#17)
  * [ ] (#13) Font path is hardcoded
  * [ ] Develop macros for unit testing
    * Naming of macros can be inspired by https://github.com/google/googletest/blob/master/googletest/docs/primer.md 
