@@ -1,5 +1,6 @@
 struct Walls {
     Box box{{600, 200}, {300, 300}};
+    // TODO(#17): inner boxes should be abstracted away for easier L-,Z-,U- shaped
     Box inner1{{600, 300}, {200, 100}};
     Box inner2{{700, 300}, {100, 200}};
     bool is_beetween_walls(Vec2f v);
