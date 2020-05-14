@@ -17,7 +17,7 @@ Animation of moving sofa problem
 ### Nice-to-have:
 
  1. Machine-learning-ish way to calculate the largest area possible.
- 1. Not only L-shaped, but Z-shaped or U-shaped Corridor
+ 1. (#17) Not only L-shaped, but Z-shaped or U-shaped Corridor
  1. Keep track of measurement uncertainty (float approx. etc.)
  1. `--demo` option that explains what is the problem all about.
 
