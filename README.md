@@ -7,6 +7,8 @@ Animation of moving sofa problem
 
 ![demo](https://raw.githubusercontent.com/JaroslawWiosna/moving-sofa/images_for_readme/demo.gif "Demo")
 
+![demo](https://raw.githubusercontent.com/JaroslawWiosna/moving-sofa/images_for_readme/demo01.gif "Demo")
+
 ## Features
 ### Minimal features:
  1. Move (or rotate) sofa, or Corridor, whatever, calculate the area of sofa
