@@ -11,8 +11,10 @@ Animation of moving sofa problem
 
 ## Features
 ### Minimal features:
- 1. Move (or rotate) sofa, or Corridor, whatever, calculate the area of sofa
- 1. Generate a set of pictures, or a gif or video
+
+Released in [0.0.1]
+
+[0.0.1]: https://github.com/jaroslawwiosna/moving-sofa/releases/tag/v0.0.1
 
 ### Nice-to-have:
 
