@@ -100,7 +100,7 @@ void Plane::draw_walls(Image& image) {
 
     for (size_t y = y1; y < y2; ++y) {
         for (size_t x = x1; x < x2; ++x) {
-            if (walls.is_outside({float(x), float(y)})) {
+            if (walls.contains({float(x), float(y)})) {
                 image.pixels[y * 900 + x] = WALLS_COLOR;
             }
         }

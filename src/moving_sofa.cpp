@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
         for (size_t i{}; i < plane.sofa.box.area.elems_size; ++i) {
             if (true == plane.sofa.box.area.elems[i]) {
                 auto elem_as_point = plane.sofa.box.area.elem_to_coord(i);
-                if (plane.walls.is_outside(elem_as_point)) {
+                if (plane.walls.contains(elem_as_point)) {
                     plane.sofa.box.area.elems[i] = false;
                 }
             }

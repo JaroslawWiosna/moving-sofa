@@ -2,8 +2,8 @@ struct Walls {
     Box box{{600, 200}, {300, 300}};
     Box inner1{{600, 300}, {200, 100}};
     Box inner2{{700, 300}, {100, 200}};
-    bool is_inside(Vec2f v);
-    bool is_outside(Vec2f v);
+    bool is_beetween_walls(Vec2f v);
+    bool contains(Vec2f v);
     void move(Vec2f v) {
         box.move(v);
         inner1.move(v);
@@ -19,9 +19,9 @@ struct Walls {
     }
 };
 
-bool Walls::is_inside(Vec2f v) {
+bool Walls::is_beetween_walls(Vec2f v) {
     return inner1.contains(v) || inner2.contains(v);
 }
-bool Walls::is_outside(Vec2f v) {
-    return box.contains(v) && !is_inside(v);
+bool Walls::contains(Vec2f v) {
+    return box.contains(v) && !is_beetween_walls(v);
 }
