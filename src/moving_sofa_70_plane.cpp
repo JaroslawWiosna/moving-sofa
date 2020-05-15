@@ -5,6 +5,7 @@ struct Plane {
     void draw_start_and_finish(Image& image);
     void draw_sofa(Image& image);
     void draw_walls(Image& image);
+    void draw_rotation_points(Image& image);
     void render(const char* filename, const char* text);
 };
 
@@ -121,6 +122,20 @@ void Plane::draw_start_and_finish(Image& image) {
     }
 }
 
+void Plane::draw_rotation_points(Image& image) {
+    for (size_t i{}; i<walls.abs_rotation_points_arr_size; ++i) {
+        auto p = walls.abs_rotation_points[i];
+        image.pixels[int(p.y) * 900 + int(p.x)] = {255, 150, 150, 220};
+    }
+    for (size_t i{}; i<walls.rel_rotation_points_arr_size; ++i) {
+        auto p = walls.rel_rotation_points[i] + walls.box.pos;
+        Line line{walls.box.pos, p};
+        line.rotate(walls.box.rotation);
+        p = line.b;
+        image.pixels[int(p.y) * 900 + int(p.x)] = {90, 90, 255, 255};
+    }
+}
+
 void Plane::render(const char* filename, const char* text) {
     Image image{};
     image.width = 900;
@@ -131,6 +146,7 @@ void Plane::render(const char* filename, const char* text) {
     draw_start_and_finish(image);
     draw_sofa(image);
     draw_walls(image);
+    draw_rotation_points(image);
     freetype::put_text_area(image, text);
 
     save_image_as_png(image, filename);

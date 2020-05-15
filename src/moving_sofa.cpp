@@ -67,5 +67,10 @@ int main(int argc, char* argv[]) {
     }
     std::cout << plane.sofa.box.calculate_area() << "\n";
 
+    Vec2f p{};
+    for (size_t i{}; i<plane.walls.rel_rotation_points_arr_size; ++i) {
+        p = plane.walls.rel_rotation_points[i];
+    }
+
     return 0;
 }
