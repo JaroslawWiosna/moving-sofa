@@ -1,10 +1,10 @@
 struct Walls {
-    Box box{{600, 200}, {300, 300}};
+    Box box{{500, 200}, {300, 300}};
     // TODO(#17): inner boxes should be abstracted away for easier L-,Z-,U- shaped
-    Box inner1{{600, 300}, {200, 100}};
-    Box inner2{{700, 300}, {100, 200}};
-    static constexpr size_t abs_rotation_points_arr_cap{100};
-    static constexpr size_t rel_rotation_points_arr_cap{100};
+    Box inner1{{500, 300}, {200, 100}};
+    Box inner2{{600, 300}, {100, 200}};
+    static constexpr size_t abs_rotation_points_arr_cap{1000};
+    static constexpr size_t rel_rotation_points_arr_cap{1000};
     size_t abs_rotation_points_arr_size{};
     size_t rel_rotation_points_arr_size{};
     Vec2f abs_rotation_points[abs_rotation_points_arr_cap];
