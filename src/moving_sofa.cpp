@@ -31,21 +31,18 @@ struct Argvs {
 };
 
 int main(int argc, char* argv[]) {
-    std::cout << "This is " << argv[0] << "\n";
-
     auto argvs = Argvs::parse(argc, argv);
     char radius_as_cstr[256];
     if (argvs.radius < 10.0f ) {
-        sprintf(radius_as_cstr, "00%1.1f", argvs.radius);
+        sprintf(radius_as_cstr, "00%1.2f", argvs.radius);
     } else if (argvs.radius < 100.0f ) {
-        sprintf(radius_as_cstr, "0%2.1f", argvs.radius);
+        sprintf(radius_as_cstr, "0%2.2f", argvs.radius);
     } else {
-        sprintf(radius_as_cstr, "%3.1f", argvs.radius);
+        sprintf(radius_as_cstr, "%3.2f", argvs.radius);
     }
     
     Plane plane{};
     plane.sofa.box.create_elems(500, 100);
-    std::cout << plane.sofa.box.calculate_area() << "\n";
     char output_filename[256];
     char text_to_display_on_image[256];
     sprintf(text_to_display_on_image, ":-)");
@@ -73,7 +70,6 @@ int main(int argc, char* argv[]) {
             }
         }
     };
-    std::cout << plane.sofa.box.calculate_area() << "\n";
     // 0deg -> 50,200   == (100 - 50 * cos(ang), 200 + 50 * sin(ang) )
     // 90deg -> 100,250 == (100 - 50 * cos(ang), 200 + 50 * sin(ang) )
     const float radius{argvs.radius};
@@ -87,13 +83,12 @@ int main(int argc, char* argv[]) {
         cut_sofa();
         render_frame();
     }
-    std::cout << plane.sofa.box.calculate_area() << "\n";
     while (plane.walls.box.pos.x > 200.0f) {
         plane.walls.move({-95.0f, 0});
         cut_sofa();
         render_frame();
     }
-    std::cout << plane.sofa.box.calculate_area() << "\n";
+    std::cout << radius_as_cstr << " " << plane.sofa.box.calculate_area() << "\n";
 
     if (argvs.final_png) {
         sprintf(output_filename, "output_rad_%s_step_%01.2f.png", radius_as_cstr, argvs.rotation_step);
